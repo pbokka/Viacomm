@@ -34,24 +34,6 @@
         <sf:retrieve username="${sf.username}" password="${sf.password}" sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" retrieveTarget="./tmp" unpackaged="./src/package.xml"/>
     </target>
 
-    <target name="retrievetCfit">
-        <delete dir="tCfit"/>
-        <mkdir dir="tCfit"/>
-        <echo message="retrieve username: ${sf.username}" />
-        <echo message="retrieve password: ${sf.password}" />
-        <echo message="retrieve environment: ${sf.serverurl}" />
-        <sf:retrieve username="${sf.username}" password="${sf.password}" sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" retrieveTarget="./tCfit" unpackaged="./src/package.xml"/>
-    </target>
-
-    <target name="retrievetPM">
-        <delete dir="tPM"/>
-        <mkdir dir="tPM"/>
-        <echo message="retrieve username: ${sf.username}" />
-        <echo message="retrieve password: ${sf.password}" />
-        <echo message="retrieve environment: ${sf.serverurl}" />
-        <sf:retrieve username="${sf.username}" password="${sf.password}" sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" retrieveTarget="./tPM" unpackaged="./src/package.xml"/>
-    </target>
-
     <target name="deploy" >
       	<echo message="deploy username: ${sf.username}" />
       	<echo message="deploy password: ${sf.password}" />
@@ -99,77 +81,12 @@
           <sf:deploy username="${validate.username}" password="${validate.password}" sessionId="${sf.sessionId}" serverurl="${validate.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="src" checkOnly="true"/>
     </target>
 
-    <target name="pre">
-        <echo message="deploy username: ${sf.username}" />
-        <echo message="deploy password: ${sf.password}" />
-        <echo message="deploy environment: ${sf.serverurl}" />
-        <sf:deploy username="${sf.username}" password="${sf.password}" sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="ref/deploy/pre" rollbackOnError="true"/>
-    </target>
-
-    <target name="preDeploy">
-        <echo message="deploy username: ${sf.username}" />
-        <echo message="deploy password: ${sf.password}" />
-        <echo message="deploy environment: ${sf.serverurl}" />
-        <sf:deploy username="${sf.username}" password="${sf.password}" sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="ref/preDeploy" rollbackOnError="true"/>
-    </target>
-
-    <target name="destroy">
-        <echo message="deploy username: ${sf.username}" />
-        <echo message="deploy password: ${sf.password}" />
-        <echo message="deploy environment: ${sf.serverurl}" />
-        <sf:deploy username="${sf.username}" password="${sf.password}" sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="ref/deploy/destroy" rollbackOnError="true"/>
-    </target>
-    <target name="post" depends="updateQCP">
-        <echo message="deploy username: ${sf.username}" />
-        <echo message="deploy password: ${sf.password}" />
-        <echo message="deploy environment: ${sf.serverurl}" />
-        <sf:deploy username="${sf.username}" password="${sf.password}" sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="ref/deploy/post" rollbackOnError="true"/>
-    </target>
-
-    <target name="retrieveFlowTmp">
-        <delete dir="tmp"/>
-        <mkdir dir="tmp"/>
-        <echo message="deploy username: ${sf.username}" />
-        <echo message="deploy password: ${sf.password}" />
-        <echo message="deploy environment: ${sf.serverurl}" />
-        <sf:retrieve username="${sf.username}" password="${sf.password}" sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" retrieveTarget="./tmp" unpackaged="./ref/retrieve/flow/package.xml"/>
-    </target>
-
     <target name="installPackages">
         <echo message="deploy username: ${sf.username}" />
         <echo message="deploy password: ${sf.password}" />
         <echo message="deploy environment: ${sf.serverurl}" />
         <sf:deploy username="${sf.username}" password="${sf.password}" sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="ref/deploy/packages" rollbackOnError="true"/>
     </target>
-
-    <!--<target name="runAllScripts">-->
-        <!--<foreach target="executeScript" param="fileName">-->
-            <!--<fileset dir="${scripts}" casesensitive="yes">-->
-                <!--<include name="**/*.apex"/>-->
-            <!--</fileset>-->
-        <!--</foreach>-->
-    <!--</target>-->
-
-    <!--<target name="executeScript">-->
-        <!--<echo message="running anononyous script ${fileName} for ${sf.username}" />-->
-        <!--<exec executable="cmd" >-->
-            <!--<arg line="/c sfdx force:apex:execute -u ${sf.username}  -f ./scripts/${fileName}"/>-->
-        <!--</exec>-->
-    <!--</target>-->
-
-    <target name="updateQCP">
-        <echo message="running anononyous script UpdateQCP for ${sf.username}" />
-        <exec executable="/bin/sh" osfamily="mac">
-            <arg line="sfdx force:apex:execute -u ${sf.username}  -f ./scripts/UpdateQCP"/>
-        </exec>
-        <exec executable="/bin/sh" osfamily="unix">
-            <arg line="sfdx force:apex:execute -u ${sf.username}  -f ./scripts/UpdateQCP"/>
-        </exec>
-        <exec executable="cmd" osfamily="windows">
-            <arg line="/c sfdx force:apex:execute -u ${sf.username}  -f ./scripts/UpdateQCP"/>
-        </exec>
-    </target>
-
 
     <!-- mods -->
 
