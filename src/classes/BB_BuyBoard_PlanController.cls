@@ -29,6 +29,7 @@ public without sharing class BB_BuyBoard_PlanController {
      public static BuyBoard_PlanWrapper getBuyBoardDetails(String buyBoardPlanId){
      	
      	//Instance of BuyBoard_PlanWrapper
+     	// Testing Apex for BuyBoard Plan Controller
 		BuyBoard_PlanWrapper buyBoardPlanData = new BuyBoard_PlanWrapper();
 		buyBoardPlanData.isSuccess = true;
 		
